@@ -6,7 +6,7 @@ roblox backrooms visual novel
 
 ## If you plan to collaborate with one or two classmates, what are their names?
 
-TODO
+I plan to work on the final project by myself
 
 ## Do you have any questions of your own?
 
