@@ -1,0 +1,24 @@
+local players = game:GetService("Players")
+local PathfindingService = game:GetService("PathfindingService")
+local RunService = game:GetService("RunService")
+
+local npc = script.Parent
+local humanoid = npc:WaitForChild("Humanoid")
+local rootPart = npc:WaitForChild("HumanoidRootPart")
+
+humanoid walkSpeed = 16
+
+local function findPlayer()
+	local nearplayer = nil
+	local shortDis = math.huge
+	for i, player in pairs(Players:GetPlayers()) do
+		if player.Character then
+			local dis = (player.Character.HumanoidRootPart.Position - rootPart.Position).Magnitude
+			if dis < shortDis and dis < 60 then
+				shortDis = dis
+				nearplayer = player.Character
+			end
+		end
+	end
+	return nearplayer
+end
