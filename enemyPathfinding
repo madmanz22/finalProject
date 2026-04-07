@@ -34,3 +34,15 @@ local function moveTo(tarPos)
 		end
 	end
 end
+RunService.Heartbeat:Connect(function())
+	if humanoid.Health <=0 then return end
+	
+	local nearplayer = findPlayer()
+	if nearplayer == nil then return end
+		
+	local TargetRootPart = nearplayer:WaitForChild("HumanoidRootPart")
+	local TargetHumanoid = nearplayer:WaitForChild("Humanoid")
+	if TargetHumanoid == nil then return end
+	local distance = (TargetRootPart.Position - rootPart.Position).Magnitude
+	moveTo(TargetRootPart.Position)
+end)
