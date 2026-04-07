@@ -22,3 +22,15 @@ local function findPlayer()
 	end
 	return nearplayer
 end
+
+local function moveTo(tarPos)
+	local path = PathfindingService:CreatePath()
+	Path:ComputeAsync(rootPart.Position, tarPos.Position)
+	
+	if Path.Status == Enum.PathStatus.Success then
+		for i, waypoint in pairs(Path:GetWaypoints()) do
+			humanoid:MoveTo(waypoint.Position)
+			humanoid.MoveToFinished:Wait()
+		end
+	end
+end
