@@ -7,3 +7,5 @@ still working on enemy tracking all the guides are old
 4/15 going to figure out how to teleport the player when they finish the maze. This will teleport them to a winners type roome letting the player know they have beat the game.
 
 Also going to try and find out how to add a jumpscare to when the monster kills the player 
+
+the first teleporting tutorial did not work so I have to find another one (I think roblox has this thing where old tutorials just don't work)

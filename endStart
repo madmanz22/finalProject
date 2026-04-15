@@ -1,12 +1,17 @@
-local teleportlocation = workspace.endEnd
+local teleportPart = script.Parent
+local destination = workspace:WaitForChild("endEnd")
+local debounce = {}
 
-script.Parent.Touched:Connect(function(hit)
-	if hit and hit.Parent:FindFirstChild("Humaniod") then
-		local char = hit.Parent
-		if char then
-			char:PivotTo(CFrame.new(teleportlocation.Position + Vector3.new(0,3,0)))
+teleportPart.Touched:Connect(function(hit)
+	local character = hit.Parent
+	local player = game.Players:GetPlayerFromCharacter(character)
+	if player and not debounce[player] then
+		debounce[player] = true
+		local root = character:FindFirstChild("HumanoidRootPart")
+		if root then
+			root.CFrame = destination.CFrame + Vector3.new(0, 3, 0)
 		end
+		debounce[player] = nil
 	end
-
 end)
 
