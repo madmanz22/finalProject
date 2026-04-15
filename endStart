@@ -1,0 +1,12 @@
+local teleportlocation = workspace.endStart
+
+script.Parent.Touched:Connect(function(hit)
+	if hit and hit.Parent:FindFirstChild("Humaniod") then
+		local char = hit.Parent
+		if char then
+			char:PivotTo(CFrame.new(teleportlocation.Position + Vector3.new(0,3,0)))
+		end
+	end
+
+end)
+
