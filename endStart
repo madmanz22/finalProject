@@ -1,4 +1,4 @@
-local teleportlocation = workspace.endStart
+local teleportlocation = workspace.endEnd
 
 script.Parent.Touched:Connect(function(hit)
 	if hit and hit.Parent:FindFirstChild("Humaniod") then
