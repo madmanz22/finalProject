@@ -5,69 +5,105 @@ local npc = script.Parent
 local humanoid = npc:WaitForChild("Humanoid")
 local root = npc:WaitForChild("HumanoidRootPart")
 
-humanoid.WalkSpeed = 20
+local DETECTION_RANGE = 60
+local ATTACK_RANGE = 7
+local MEMORY_TIME = 2 
+humanoid.WalkSpeed = 25
 
-local function getClosestPlayer()
-	local closest = nil
-	local shortest = math.huge
 
-	for _, player in pairs(Players:GetPlayers()) do
-		if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-			local dist = (player.Character.HumanoidRootPart.Position - root.Position).Magnitude
-			if dist < shortest then
-				shortest = dist
-				closest = player
-			end
-		end
+local waypointsFolder = workspace:FindFirstChild("Waypoints")
+local patrolPoints = waypointsFolder and waypointsFolder:GetChildren() or {}
+local lastSeenTime = 0
+local currentTarget = nil
+
+local function canSeePlayer(player)
+	if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+		return false
 	end
 
-	return closest
+	local targetRoot = player.Character.HumanoidRootPart
+	local direction = (targetRoot.Position - root.Position)
+
+	if direction.Magnitude > DETECTION_RANGE then
+		return false
+	end
+
+	local rayParams = RaycastParams.new()
+	rayParams.FilterDescendantsInstances = {npc}
+	rayParams.FilterType = Enum.RaycastFilterType.Exclude
+
+	local ray = workspace:Raycast(root.Position, direction, rayParams)
+
+	if ray and ray.Instance then
+		return ray.Instance:IsDescendantOf(player.Character)
+	end
+
+	return false
 end
 
-local function moveToTarget(target)
-	if not target or not target.Character or not target.Character:FindFirstChild("HumanoidRootPart") then
-		return
+local function getTarget()
+	for _, player in pairs(Players:GetPlayers()) do
+		if canSeePlayer(player) then
+			return player
+		end
 	end
+	return nil
+end
 
-	local targetPos = target.Character.HumanoidRootPart.Position
-
+local function moveTo(position)
 	local path = PathfindingService:CreatePath()
-	path:ComputeAsync(root.Position, targetPos)
+	path:ComputeAsync(root.Position, position)
 
 	if path.Status == Enum.PathStatus.Success then
-		local waypoints = path:GetWaypoints()
-
-		for i, waypoint in ipairs(waypoints) do
+		for _, waypoint in ipairs(path:GetWaypoints()) do
 			humanoid:MoveTo(waypoint.Position)
 
 			if waypoint.Action == Enum.PathWaypointAction.Jump then
 				humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 			end
 
-			
-			local reached = humanoid.MoveToFinished:Wait(1)
-
-			if not reached then
-				break
-			end
-
-			if i > 2 then
-				break
-			end
+			humanoid.MoveToFinished:Wait()
 		end
 	else
-		humanoid:MoveTo(targetPos)
+		humanoid:MoveTo(position)
 	end
 end
 
+local function patrol()
+	if #patrolPoints == 0 then return end
 
+	local point = patrolPoints[math.random(1, #patrolPoints)]
+	moveTo(point.Position)
+end
+
+root.Touched:Connect(function(hit)
+	local character = hit.Parent
+	local hum = character and character:FindFirstChild("Humanoid")
+
+	if hum and Players:GetPlayerFromCharacter(character) then
+		hum.Health = 0 -- instant kill
+	end
+end)
 
 while true do
-	local player = getClosestPlayer()
+	local seenPlayer = getTarget()
 
-	if player then
-		moveToTarget(player)
+	if seenPlayer then
+		currentTarget = seenPlayer
+		lastSeenTime = tick()
 	end
 
-	task.wait(0.2) 
+	if currentTarget and currentTarget.Character and currentTarget.Character:FindFirstChild("HumanoidRootPart") then
+		local targetPos = currentTarget.Character.HumanoidRootPart.Position
+
+		if tick() - lastSeenTime <= MEMORY_TIME then
+			moveTo(targetPos)
+		else
+			currentTarget = nil
+		end
+	else
+		patrol()
+	end
+
+	wait(0.3)
 end

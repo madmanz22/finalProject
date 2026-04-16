@@ -9,3 +9,7 @@ still working on enemy tracking all the guides are old
 Also going to try and find out how to add a jumpscare to when the monster kills the player 
 
 the first teleporting tutorial did not work so I have to find another one (I think roblox has this thing where old tutorials just don't work)
+
+4/16 adding a background sound effect for the buzz of the lights
+also updated the enemy pathfinding and going to add a sound effect when player is killed
+going to look into how i could add a jumpscare and other cut scenes 
