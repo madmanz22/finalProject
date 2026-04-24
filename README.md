@@ -15,3 +15,4 @@ also updated the enemy pathfinding and going to add a sound effect when player i
 going to look into how i could add a jumpscare and other cut scenes 
 
 4/24 Made the server size to one player. changed a setting to lock the player into first person while playing. I also changed the graphics settings of the studio to make the game visualy better. Still need to find out how to make a jump scare and effects on the player's screen. I am also going to look into how to make the eneimes appear as the player in the lobby. Wrote a little story for the game nothing too crazy. I also want to add a playlist of songs for the background music that plays the songs in a random order but i will wait until the end to do that.
+I added a guiscript that changes the origninal mouse into a smaller one

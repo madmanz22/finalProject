@@ -1,0 +1,8 @@
+local runService = game:GetService("RunService")
+local input = game:GetService("UserInputService")
+local players = game:GetService("Players")
+local cam = game.Workspace.CurrentCamera
+local player = players.LocalPlayer
+
+local m = player:GetMouse()
+m.Icon = "http://www.roblox.com/asset/?id=569021388"
