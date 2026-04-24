@@ -1,14 +1,76 @@
 local textLabel = script.Parent:WaitForChild("TextLabel")
+local textLabel2 = script.Parent:WaitForChild("TextLabel2")
+local textLabel3 = script.Parent:WaitForChild("TextLabel3")
+local textLabel4 = script.Parent:WaitForChild("TextLabel4")
+local textLabel5 = script.Parent:WaitForChild("TextLabel5")
 textLabel.Visible = false
+textLabel2.Visible = false
+textLabel3.Visible = false
+textLabel4.Visible = false
+textLabel5.Visible = false
+ScreenGui = script.Parent
+
 wait(5)
 textLabel.Visible = true
 for i = 1, 30 do
 	textLabel.TextTransparency = 1 - (i * 0.1)
 	wait(0.05)
 end
-wait(7)
+wait(4)
 for i = 1, 20 do
 	textLabel.TextTransparency = i * 0.1
 	wait(0.05)
 end
 textLabel.Visible = false
+
+wait(0.2)
+textLabel2.Visible = true
+for i = 1, 30 do
+	textLabel2.TextTransparency = 1 - (i * 0.1)
+	wait(0.05)
+end
+wait(2)
+for i = 1, 20 do
+	textLabel2.TextTransparency = i * 0.1
+	wait(0.05)
+end
+textLabel3.Visible = false
+wait(0.2)
+textLabel3.Visible = true
+for i = 1, 30 do
+	textLabel3.TextTransparency = 1 - (i * 0.1)
+	wait(0.05)
+end
+wait(2)
+for i = 1, 20 do
+	textLabel3.TextTransparency = i * 0.1
+	wait(0.05)
+end
+textLabel3.Visible = false
+
+wait(0.2)
+textLabel4.Visible = true
+for i = 1, 30 do
+	textLabel4.TextTransparency = 1 - (i * 0.1)
+	wait(0.05)
+end
+wait(2)
+for i = 1, 20 do
+	textLabel4.TextTransparency = i * 0.1
+	wait(0.05)
+end
+textLabel4.Visible = false
+
+wait(0.2)
+textLabel5.Visible = true
+for i = 1, 30 do
+	textLabel5.TextTransparency = 1 - (i * 0.1)
+	wait(0.05)
+end
+wait(2)
+for i = 1, 20 do
+	textLabel5.TextTransparency = i * 0.1
+	wait(0.05)
+end
+
+ScreenGui.Enabled = false
