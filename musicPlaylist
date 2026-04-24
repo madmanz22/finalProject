@@ -1,0 +1,22 @@
+local SoundGroup = game.SoundService.SoundGroup -- Change SoundGroup to whatever you named your SoundGroup
+local Playlist = {
+	SoundGroup.Sound1,
+	SoundGroup.Sound2,
+	SoundGroup.Sound3,
+	SoundGroup.Sound4,
+}
+
+local function PlayRandomSound()
+	local randomIndex = math.random(1, #Playlist)
+	local Sounds = Playlist[randomIndex]
+
+	if Sounds then
+		Sounds:Play()
+		Sounds.Ended:Wait()
+	end
+end
+
+while true do
+	PlayRandomSound() 
+	wait(0.5)
+end
