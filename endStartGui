@@ -1,0 +1,15 @@
+script.Parent.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		game.Players:FindFirstChild(hit.Parent.Name).PlayerGui.endGui.TextLabel7.Visible = true
+		for i = 1, 30 do
+			game.Players:FindFirstChild(hit.Parent.Name).PlayerGui.endGui.TextLabel7.TextTransparency = 1 - (i * 0.1)
+			wait(0.05)
+		end
+		wait(3)
+		for i = 1, 20 do
+			game.Players:FindFirstChild(hit.Parent.Name).PlayerGui.endGui.TextLabel7.TextTransparency = i * 0.1
+			wait(0.05)
+		end
+		game.Players:FindFirstChild(hit.Parent.Name).PlayerGui.endGui.TextLabel7.Visible = false
+	end
+end)
