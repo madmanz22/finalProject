@@ -1,0 +1,8 @@
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		character:WaitForChild("Humanoid").Died:Connect(function()
+			wait(3)
+			player:Kick("The lurkers of this place have killed you!")
+		end)
+	end)
+end)
