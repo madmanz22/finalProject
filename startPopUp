@@ -1,0 +1,14 @@
+local textLabel = script.Parent:WaitForChild("TextLabel")
+textLabel.Visible = false
+wait(5)
+textLabel.Visible = true
+for i = 1, 30 do
+	textLabel.TextTransparency = 1 - (i * 0.1)
+	wait(0.05)
+end
+wait(7)
+for i = 1, 20 do
+	textLabel.TextTransparency = i * 0.1
+	wait(0.05)
+end
+textLabel.Visible = false
