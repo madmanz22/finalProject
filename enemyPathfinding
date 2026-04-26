@@ -8,16 +8,21 @@ local root = npc:WaitForChild("HumanoidRootPart")
 
 
 
-local DETECTION_RANGE = 60
+local DETECTION_RANGE = 100
 local ATTACK_RANGE = 7
-local MEMORY_TIME = 2 
-humanoid.WalkSpeed = 25
+local MEMORY_TIME = 5
+humanoid.WalkSpeed = 30
 
 
 local waypointsFolder = workspace:FindFirstChild("Waypoints")
 local patrolPoints = waypointsFolder and waypointsFolder:GetChildren() or {}
 local lastSeenTime = 0
 local currentTarget = nil
+
+local animation = script:WaitForChild('Animation')
+local humanoid = script.Parent:WaitForChild('Humanoid')
+local dance = humanoid:LoadAnimation(animation)
+
 
 local function canSeePlayer(player)
 	if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
@@ -58,8 +63,10 @@ local function moveTo(position)
 	path:ComputeAsync(root.Position, position)
 
 	if path.Status == Enum.PathStatus.Success then
+		dance:Play()
 		for _, waypoint in ipairs(path:GetWaypoints()) do
 			humanoid:MoveTo(waypoint.Position)
+			
 
 			if waypoint.Action == Enum.PathWaypointAction.Jump then
 				humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
