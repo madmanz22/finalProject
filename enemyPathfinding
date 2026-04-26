@@ -10,11 +10,11 @@ local root = npc:WaitForChild("HumanoidRootPart")
 
 local DETECTION_RANGE = 100
 local ATTACK_RANGE = 7
-local MEMORY_TIME = 5
-humanoid.WalkSpeed = 30
+local MEMORY_TIME = 2
+humanoid.WalkSpeed = 20
 
 
-local waypointsFolder = workspace:FindFirstChild("Waypoints")
+local waypointsFolder = script.Parent:FindFirstChild("Waypoints")
 local patrolPoints = waypointsFolder and waypointsFolder:GetChildren() or {}
 local lastSeenTime = 0
 local currentTarget = nil
@@ -84,6 +84,7 @@ local function patrol()
 
 	local point = patrolPoints[math.random(1, #patrolPoints)]
 	moveTo(point.Position)
+	wait(2)
 end
 
 root.Touched:Connect(function(hit)
