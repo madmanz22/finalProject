@@ -6,6 +6,7 @@ Video Demostration: https://youtu.be/CQhWS35Z3UI
 
 
 LOG:
+
     not sure how to connect roblox studio with github so i will just upload the code thats used in the project 
 
     4/14 I went back today and found out the first video helping me did not work so i will try another one.
